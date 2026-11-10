@@ -1,3 +1,4 @@
+k
 name: Build APK
 on:
   workflow_dispatch:
@@ -7,7 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: unzip -q EReader.zip
+      - name: Unzip project
+        run: |
+          ls -la
+          Z=$(find . -iname '*.zip' | head -n1)
+          echo "Found zip: $Z"
+          unzip -q "$Z"
+          ls -la
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
